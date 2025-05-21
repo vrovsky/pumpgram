@@ -1,9 +1,14 @@
-import { useState } from "react";
+import Layout from "./components/Layout.jsx";
+import Grid from "./components/Grid.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <></>;
+  return (
+    <Layout>
+      <main>
+        <Grid />
+      </main>
+    </Layout>
+  );
 }
 
 export default App;
