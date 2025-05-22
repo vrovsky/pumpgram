@@ -34,7 +34,7 @@ export default function Hero() {
         </div>
         <div className="rule-item">
           <p>
-            <b>Weight*s</b>
+            <b>Weight*</b>
           </p>
           <p>
             Select the maximum weight that allows you to complete the set with

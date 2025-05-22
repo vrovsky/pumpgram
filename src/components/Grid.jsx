@@ -3,11 +3,11 @@ import { workoutProgram as training_plan } from "../utils/index.js";
 import WorkoutCard from "./WorkoutCard";
 
 export default function Grid() {
-  const isLocked = true;
-  const selectedWorkout = 4;
+  const isLocked = false;
+  const selectedWorkout = 6;
 
   return (
-    <div className="training-grid-plan">
+    <div className="training-plan-grid">
       {Object.keys(training_plan).map((workout, workoutIndex) => {
         const type =
           workoutIndex % 3 === 0
@@ -43,13 +43,13 @@ export default function Grid() {
 
         return (
           <button
-            className={"card-plan-card " + (isLocked ? "inactive" : "")}
+            className={"plan-card " + (isLocked ? "inactive" : "")}
             key={workoutIndex}
           >
             <div className="plan-card-header">
               <p>Day {dayNum}</p>
+              {isLocked ? <i className="fa-solid fa-lock" /> : icon}
             </div>
-            {isLocked ? <i className="fa-solid fa-lock" /> : icon}
             <div className="plan-card-header">
               <h4>
                 <b>{type}</b>

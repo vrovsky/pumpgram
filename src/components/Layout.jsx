@@ -17,11 +17,6 @@ export default function Layout(props) {
         <a target="_blank" href="https://vrovsky.netlify.app">
           Vrovsky
         </a>
-        <br />
-        Styled with{" "}
-        <a target="_blank" href="https://fantacss.smoljames.com">
-          FantaCSS
-        </a>
       </p>
     </footer>
   );
