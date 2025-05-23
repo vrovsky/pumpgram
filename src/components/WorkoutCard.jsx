@@ -1,19 +1,24 @@
-import React from "react";
+import React, { use, useState } from "react";
 import Modal from "./Modal";
+import { exerciseDescriptions } from "../utils";
 
 export default function WorkoutCard(props) {
   const { trainingPlan, workoutIndex, type, dayNum, icon } = props;
 
   const { warmup, workout } = trainingPlan || {};
 
-  const showExerciseDescription = { name: "asdasd", description: "asdasd" };
+  const [showExerciseDescription, setShowExerciseDescription] = useState(null);
 
   return (
     <div className="workout-container">
-      {/* <Modal
-        showExerciseDescription={showExerciseDescription}
-        handleCLoseModal={() => {}}
-      /> */}
+      {showExerciseDescription && (
+        <Modal
+          showExerciseDescription={showExerciseDescription}
+          handleCloseModal={() => {
+            setShowExerciseDescription(null);
+          }}
+        />
+      )}
       <div className="workout-card card">
         <div className="plan-card-header">
           <p>Day {dayNum}</p>
@@ -40,7 +45,15 @@ export default function WorkoutCard(props) {
                 <p>
                   {warmupIndex + 1}. {warmupExercise.name}
                 </p>
-                <button className="help-icon">
+                <button
+                  onClick={() =>
+                    setShowExerciseDescription({
+                      name: warmupExercise.name,
+                      description: exerciseDescriptions[warmupExercise.name],
+                    })
+                  }
+                  className="help-icon"
+                >
                   <i className="fa-regular fa-circle-question" />
                 </button>
               </div>
@@ -66,7 +79,15 @@ export default function WorkoutCard(props) {
                 <p>
                   {workoutIndex + 1}. {workoutExercise.name}
                 </p>
-                <button className="help-icon">
+                <button
+                  onClick={() =>
+                    setShowExerciseDescription({
+                      name: workoutExercise.name,
+                      description: exerciseDescriptions[workoutExercise.name],
+                    })
+                  }
+                  className="help-icon"
+                >
                   <i className="fa-regular fa-circle-question" />
                 </button>
               </div>
