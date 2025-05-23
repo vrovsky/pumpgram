@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { workoutProgram as training_plan } from "../utils/index.js";
 import WorkoutCard from "./WorkoutCard";
 
 export default function Grid() {
+  const [savedWorkouts, setSavedWorkouts] = useState(null);
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const completedWorkouts = [];
   const isLocked = false;
-  const selectedWorkout = 6;
+
+  function handleSave(index, data) {
+    console.log("aaaa");
+    const newObj = {
+      ...savedWorkouts,
+      [index]: {
+        ...data,
+        isConplete: !!data.isConplete || !!savedWorkouts?.[index]?.isConplete,
+      },
+    };
+    setSavedWorkouts(newObj);
+    localStorage.setItem("pumpgram", JSON.stringify(newObj));
+    setSavedWorkouts(null);
+  }
+
+  function handleComplete(index, data) {
+    const newObj = { ...data };
+    newObj.isConplete = true;
+    handleSave(index, newObj);
+  }
 
   return (
     <div className="training-plan-grid">
@@ -32,6 +54,8 @@ export default function Grid() {
           return (
             <WorkoutCard
               key={workoutIndex}
+              handleSave={handleSave}
+              handleComplete={handleComplete}
               trainingPlan={trainingPlan}
               type={type}
               workoutIndex={workoutIndex}
@@ -43,6 +67,7 @@ export default function Grid() {
 
         return (
           <button
+            onClick={() => setSelectedWorkout(workoutIndex)}
             className={"plan-card " + (isLocked ? "inactive" : "")}
             key={workoutIndex}
           >
